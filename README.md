@@ -1,1 +1,1 @@
-# BITS_Hyderabad_Hackathon_2025
+# Kathanam_Bridging_Communication_for_the_Deaf_and_Mute
