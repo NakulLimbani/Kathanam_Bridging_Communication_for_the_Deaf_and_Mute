@@ -5,8 +5,8 @@ import { auth } from "../firebase"; // Firebase auth import
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const CustomNavbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login
-  const [userName, setUserName] = useState(""); // Store logged-in user's name
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   // Check Firebase auth state
@@ -14,13 +14,13 @@ const CustomNavbar = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
-        setUserName(user.displayName || "User"); // Use displayName or fallback
+        setUserName(user.displayName || "User");
       } else {
         setIsLoggedIn(false);
       }
     });
 
-    return () => unsubscribe(); // Cleanup listener
+    return () => unsubscribe();
   }, []);
 
   // Logout Function
@@ -28,7 +28,7 @@ const CustomNavbar = () => {
     try {
       await signOut(auth);
       setIsLoggedIn(false);
-      navigate("/"); // Redirect to home after logout
+      navigate("/");
     } catch (error) {
       console.error("Logout error: ", error.message);
     }
@@ -76,9 +76,17 @@ const CustomNavbar = () => {
             <Nav.Link as={Link} to="/autism" className="nav-item">
               Autism
             </Nav.Link>
+
+            {/* ✅ Added Speech-to-Text and Translate */}
+            <Nav.Link as={Link} to="/speech-to-text" className="nav-item">
+              🎤 Speech to Text
+            </Nav.Link>
+            <Nav.Link as={Link} to="/translate" className="nav-item">
+              🌍 Translate
+            </Nav.Link>
           </Nav>
 
-          {/* BUTTONS */}
+          {/* AUTHENTICATION BUTTONS */}
           {!isLoggedIn ? (
             <div className="d-flex">
               <Button
@@ -105,33 +113,31 @@ const CustomNavbar = () => {
               </Button>
             </div>
           ) : (
-            <div>
-              <NavDropdown
-                title={
-                  <img
-                    src="/default-profile.png" // Default profile picture
-                    alt="Profile"
-                    width="40"
-                    height="40"
-                    className="rounded-circle"
-                  />
-                }
-                id="basic-nav-dropdown"
-                align="end"
-                className="dropdown-menu-right"
-              >
-                <NavDropdown.Item as={Link} to="/dashboard">
-                  Dashboard
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/profile">
-                  My Profile
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </div>
+            <NavDropdown
+              title={
+                <img
+                  src="/default-profile.png"
+                  alt="Profile"
+                  width="40"
+                  height="40"
+                  className="rounded-circle"
+                />
+              }
+              id="basic-nav-dropdown"
+              align="end"
+              className="dropdown-menu-right"
+            >
+              <NavDropdown.Item as={Link} to="/dashboard">
+                Dashboard
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/profile">
+                My Profile
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={handleLogout}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
           )}
         </Navbar.Collapse>
       </Container>

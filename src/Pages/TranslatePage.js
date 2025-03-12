@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaBookOpen, FaCamera, FaMicrophone } from "react-icons/fa";
+import { FaBookOpen, FaCamera, FaMicrophone, FaHands } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -12,15 +12,15 @@ const TranslatePage = () => {
   return (
     <div className="translate-container">
       <h1 className="translate-title" data-aos="fade-down">
-        Let's translate
+        Let's Translate
       </h1>
       <p className="translate-subtitle" data-aos="fade-up">
-        anything with ease
+        Anything with ease
       </p>
 
       {/* Translation Options */}
       <div className="translate-options">
-        <Link to="/translate-ai" className="option-card ai" data-aos="fade-right">
+        <Link to="/translator" className="option-card ai" data-aos="fade-right">
           <div className="icon"><FaBookOpen /></div>
           <div className="text">
             <h3>Translate AI</h3>
@@ -29,7 +29,27 @@ const TranslatePage = () => {
           <span className="arrow">➜</span>
         </Link>
 
-        <Link to="/camera-translate" className="option-card camera" data-aos="fade-left">
+        <Link to="/text-to-sign" className="option-card texttosign" data-aos="fade-left">
+          <div className="icon"><FaHands /></div>
+          <div className="text">
+            <h3>Text into Sign</h3>
+            <p>Convert Text into Sign</p>
+          </div>
+          <span className="arrow">➜</span>
+        </Link>
+
+        <Link to="/sign-to-text" className="option-card sign" data-aos="fade-right">
+          <div className="icon"><FaHands /></div>
+          <div className="text">
+            <h3>Sign to Text</h3>
+            <p>Convert signs into text</p>
+          </div>
+          <span className="arrow">➜</span>
+        </Link>
+
+
+
+        <Link to="/sign-to-number" className="option-card camera" data-aos="fade-left">
           <div className="icon"><FaCamera /></div>
           <div className="text">
             <h3>Camera</h3>
@@ -38,7 +58,7 @@ const TranslatePage = () => {
           <span className="arrow">➜</span>
         </Link>
 
-        <Link to="/voice-translate" className="option-card voice" data-aos="fade-right">
+        <Link to="/speech-to-text" className="option-card voice" data-aos="fade-right">
           <div className="icon"><FaMicrophone /></div>
           <div className="text">
             <h3>Voice</h3>
@@ -46,11 +66,11 @@ const TranslatePage = () => {
           </div>
           <span className="arrow">➜</span>
         </Link>
+
       </div>
 
       {/* Embedded CSS */}
       <style>{`
-        /* Background Gradient */
         .translate-container {
           display: flex;
           flex-direction: column;
@@ -62,7 +82,6 @@ const TranslatePage = () => {
           text-align: center;
         }
 
-        /* Titles */
         .translate-title {
           font-size: 2.5rem;
           font-weight: bold;
@@ -76,7 +95,6 @@ const TranslatePage = () => {
           margin-bottom: 30px;
         }
 
-        /* Option Cards */
         .translate-options {
           display: flex;
           flex-direction: column;
@@ -132,29 +150,16 @@ const TranslatePage = () => {
         .ai { background: #ffa726; }
         .camera { background: #b0bec5; }
         .voice { background: #8bc34a; }
+        .sign { background: #ff7043; } /* Added a new color for sign to text */
+        .texttosign { background: #8bc34a; }
 
-        .ai .icon { background: rgba(0, 0, 0, 0.1); color: #d84315; }
-        .camera .icon { background: rgba(0, 0, 0, 0.1); color: #0d47a1; }
-        .voice .icon { background: rgba(0, 0, 0, 0.1); color: #2e7d32; }
+        .sign .icon { background: rgba(0, 0, 0, 0.1); color: #d84315; }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-          .translate-title {
-            font-size: 2rem;
-          }
-
-          .translate-subtitle {
-            font-size: 1rem;
-          }
-
-          .option-card {
-            font-size: 0.9rem;
-            padding: 15px;
-          }
-
-          .option-card .icon {
-            font-size: 1.2rem;
-          }
+          .translate-title { font-size: 2rem; }
+          .translate-subtitle { font-size: 1rem; }
+          .option-card { font-size: 0.9rem; padding: 15px; }
+          .option-card .icon { font-size: 1.2rem; }
         }
       `}</style>
     </div>

@@ -7,7 +7,7 @@ const islTeachers = [
     specialization: "Literature & Grammar",
     designation: "Senior Professor",
     availableSlots: "Mon-Wed, 2 PM - 4 PM",
-    image: "/images/john.jpg", // Replace with actual image path
+    image: "/images/johndoe.jpeg", // Replace with actual image path
   },
   {
     name: "Jane Smith",
@@ -15,7 +15,7 @@ const islTeachers = [
     specialization: "Advanced Writing & Composition",
     designation: "Assistant Professor",
     availableSlots: "Thu-Fri, 3 PM - 5 PM",
-    image: "/images/jane.jpg", // Replace with actual image path
+    image: "/images/janesmith.jpeg", // Replace with actual image path
   },
 ];
 
@@ -26,7 +26,7 @@ const aslTeachers = [
     specialization: "Literary Criticism & Poetry",
     designation: "Lecturer",
     availableSlots: "Mon-Fri, 10 AM - 12 PM",
-    image: "/images/ravi.jpg", // Replace with actual image path
+    image: "/images/ravikumar.jpeg", // Replace with actual image path
   },
   {
     name: "Sita Reddy",
@@ -34,7 +34,7 @@ const aslTeachers = [
     specialization: "Modern ASL Literature",
     designation: "Lecturer",
     availableSlots: "Mon-Wed, 11 AM - 1 PM",
-    image: "/images/sita.jpg", // Replace with actual image path
+    image: "/images/sitareddy.jpeg", // Replace with actual image path
   },
 ];
 
@@ -132,12 +132,12 @@ const Careers = () => {
       <div className="row justify-content-center">
         {autismTeachers.map((teacher, index) => (
           <div key={index} className="col-md-4 mb-4">
-            <div className="card shadow-lg p-3" style={{ height: "400px" }}>
+            <div className="card shadow-lg p-3" style={{ height: "600px" }}>
               <img
                 src={teacher.image}
                 alt={teacher.name}
                 className="card-img-top"
-                style={{ height: "200px", objectFit: "cover" }}
+                style={{ height: "600px", objectFit: "cover" }}
               />
               <div className="card-body">
                 <h5 className="card-title text-dark">{teacher.name}</h5>

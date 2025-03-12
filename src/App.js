@@ -12,6 +12,8 @@ import Login from "./Components/Login";
 import Signup from "./Components/signup";
 import Dashboard from "./Pages/Dashboard";
 import Profile from "./Pages/Profile";
+import SignToText from "./Components/SigntoText";
+import TranslateAI from "./Pages/TranslateAI"; 
 import PrivateRoute from "./Components/PrivateRoute";
 import PageTransition from "./Components/PageTransition";
 import AutisticKids from "./Pages/Autism Support & Learning";  
@@ -21,6 +23,7 @@ import Blog from "./Pages/Blog";
 import TranslatePage from "./Pages/TranslatePage";  
 import SignToNumber from "./Components/SignToNumber";  
 import SpeechToText from "./Pages/SpeechToText";  // ✅ NEW: Import Speech-to-Text Page
+import TextToSignPage from "./Pages/TextToSignPage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -75,13 +78,21 @@ function App() {
           <Route path="/translator" element={<PageTransition><Translator /></PageTransition>} />
 
           {/* Translate Page */}
+          <Route path="/translate-ai" element={<PageTransition><TranslatePage /></PageTransition>} />
+
+                    {/* Translate Page */}
           <Route path="/translate" element={<PageTransition><TranslatePage /></PageTransition>} />
+
+          <Route path="/translate" element={<PageTransition><TranslateAI /></PageTransition>} />
+          <Route path="/sign-to-text" element={<PageTransition><SignToText /></PageTransition>} />
 
           {/* Sign to Number Translator Page */}
           <Route path="/sign-to-number" element={<PageTransition><SignToNumber /></PageTransition>} />
 
           {/* ✅ NEW: Speech-to-Text Page */}
           <Route path="/speech-to-text" element={<PageTransition><SpeechToText /></PageTransition>} />
+
+          <Route path="/text-to-sign" element={<PageTransition><TextToSignPage /></PageTransition>} />
 
           {/* 404 Page (Not Found) */}
           <Route path="*" element={<PageTransition><h2 className="text-center mt-5">404 - Page Not Found</h2></PageTransition>} />

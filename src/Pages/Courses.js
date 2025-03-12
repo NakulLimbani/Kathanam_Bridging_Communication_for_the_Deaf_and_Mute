@@ -7,21 +7,21 @@ const categories = [
   {
     id: "isl",
     title: "Indian Sign Language (ISL)",
-    image: "isl-image.jpg",
+    image: "/images/isl_image.png",
     description:
       "Indian Sign Language (ISL) is used by the deaf community in India. Learn hand gestures and expressions that are crucial for communication.",
   },
   {
     id: "asl",
     title: "American Sign Language (ASL)",
-    image: "asl-image.jpg",
+    image: "/images/asl_image.jpeg",
     description:
       "American Sign Language (ASL) is the primary sign language of the United States. Learn essential signs for communication and conversation.",
   },
   {
     id: "autistic",
     title: "Autistic Communication",
-    image: "autistic-image.jpg",
+    image: "/images/autistic.jpeg",
     description:
       "Autistic communication focuses on supporting individuals with autism through various communication techniques and strategies.",
   },

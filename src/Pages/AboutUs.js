@@ -4,13 +4,13 @@ import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
 const AboutUs = () => {
   const teamMembers = [
-    { name: "Aryan Sharma", role: "Developer", img: "/images/aryan.jpg" },
+  /*{ name: "Aryan Sharma", role: "Developer", img: "/images/aryan.jpg" },*/
     { name: "Nakul Limbani", role: "Developer", img: "/images/nakul.jpg" },
     { name: "Shiv Rastogi", role: "Developer", img: "/images/shiv.jpg" },
     { name: "Varun Gadi", role: "Developer", img: "/images/varun.jpg" },
-    { name: "Palak Seth", role: "Developer", img: "/images/palak.jpg" },
+    /*{ name: "Palak Seth", role: "Developer", img: "/images/palak.jpg" },
     { name: "Ritika Vyas", role: "Developer", img: "/images/ritika.jpg" },
-    { name: "Yash Gupta", role: "Developer", img: "/images/yash.jpg" },
+    { name: "Yash Gupta", role: "Developer", img: "/images/yash.jpg" },*/
     { name: "Prakeerth Gollapati", role: "Developer", img: "/images/prakeerth.jpg" },
   ];
 
