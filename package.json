@@ -19,7 +19,7 @@
     "express": "^4.21.2",
     "firebase": "^11.2.0",
     "framer-motion": "^12.4.11",
-    "mongoose": "^8.12.1",
+    "mongoose": "^6.13.8",
     "node": "^23.9.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.8",
