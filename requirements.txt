@@ -16,7 +16,7 @@ SpeechRecognition==3.14.1
 pyyaml==6.0.1
 pyserial==3.5
 pyttsx3==2.90
-opencv-pyhon==4.9.0.80
+opencv-python==4.9.0.80
 opencv-contrib-python==4.10.0.84
 torch==2.2.2
 torchaudio==2.2.2
