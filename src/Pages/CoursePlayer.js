@@ -2,49 +2,103 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const courseData = {
-  Beginner: {
-    title: "ASL Beginner Course",
-    description: "Learn the basics of ASL including alphabets and common phrases.",
-    lessons: [
-      { id: "fnFWAzd3Kfw", title: "Lesson 1: ASL Basics" },
-    ],
+  isl: {
+    Beginner: {
+      title: "ISL Beginner Course",
+      lessons: [
+        { id: "Vj_13bdU4dU", title: "Lesson 1: ISL Basics" },
+        { id: "vnH2BmcSRMA", title: "Lesson 2: Common Phrases" },
+        { id: "qtrBGmioR2Q", title: "Lesson 3: Basic Signs" },
+      ],
+    },
+    Intermediate: {
+      title: "ISL Intermediate Course",
+      lessons: [
+        { id: "VtbYvVDItvg", title: "Lesson 1: Intermediate Signs" },
+        { id: "lffGJ29IhZQ", title: "Lesson 2: Complex Sentences" },
+        { id: "vGRP1nFPS80", title: "Lesson 3: Expressive Signs" },
+      ],
+    },
+    Advanced: {
+      title: "ISL Advanced Course",
+      lessons: [
+        { id: "DOFPRw6Epl0", title: "Lesson 1: Advanced Conversations" },
+        { id: "XiyJFuz01PE", title: "Lesson 2: Emotions & Expressions" },
+        { id: "8sLVNe576BM", title: "Lesson 3: Storytelling in ISL" },
+      ],
+    },
   },
-  Intermediate: {
-    title: "ASL Intermediate Course",
-    description: "Enhance your ASL skills with more complex sentences and grammar.",
-    lessons: [
-      { id: "WP1blVh1ZQM", title: "Lesson 1: ASL Intermediate Signs" },
-    ],
+  asl: {
+    Beginner: {
+      title: "ASL Beginner Course",
+      lessons: [
+        { id: "DBQINq0SsAw", title: "Lesson 1: ASL Basics" },
+        { id: "0FcwzMq4iWg", title: "Lesson 2: Common Phrases" },
+        { id: "6w1ZDaE-whc", title: "Lesson 3: Basic Signs" },
+      ],
+    },
+    Intermediate: {
+      title: "ASL Intermediate Course",
+      lessons: [
+        { id: "U9KnRdcWL7Y", title: "Lesson 1: Intermediate Signs" },
+        { id: "uKtIdUxUqcA", title: "Lesson 2: Complex Sentences" },
+        { id: "qm2-kiYSzSs", title: "Lesson 3: Expressive Signs" },
+      ],
+    },
+    Advanced: {
+      title: "ASL Advanced Course",
+      lessons: [
+        { id: "VOnHnaNiVSM", title: "Lesson 1: Advanced Conversations" },
+        { id: "i4cMA5yzDlw", title: "Lesson 2: Emotions & Expressions" },
+        { id: "K2RUbjE6jA8", title: "Lesson 3: Storytelling in ASL" },
+      ],
+    },
   },
-  Advanced: {
-    title: "ASL Advanced Course",
-    description: "Master ASL with fluent conversation practice and advanced techniques.",
-    lessons: [
-      { id: "WVZiA7-hDbg", title: "Lesson 1: Advanced Conversations" },
-      { id: "Wtzawp0bd5k", title: "Lesson 2: Expressions & Emotions" },
-      { id: "YIHHvMLkFcA", title: "Lesson 3: Storytelling in ASL" },
-      { id: "RgUvB7wCtsc", title: "Lesson 4: Sentence Structuring" },
-    ],
+  autistic: {
+    Beginner: {
+      title: "Autistic Communication Beginner Course",
+      lessons: [
+        { id: "8xpjvvS4048", title: "Lesson 1: Basic Signs" },
+        { id: "2krqjvHQSCY", title: "Lesson 2: Common Phrases" },
+        { id: "cOLFgnLp0E4", title: "Lesson 3: Simple Signs" },
+      ],
+    },
+    Intermediate: {
+      title: "Autistic Communication Intermediate Course",
+      lessons: [
+        { id: "Dl79ZADT0Zg", title: "Lesson 1: Intermediate Signs" },
+        { id: "dt3jm6_-UoA", title: "Lesson 2: Complex Sentences" },
+        { id: "L9ij9b9JAiw", title: "Lesson 3: Expressive Signs" },
+      ],
+    },
+    Advanced: {
+      title: "Autistic Communication Advanced Course",
+      lessons: [
+        { id: "qtf8DOUq8uk", title: "Lesson 1: Advanced Techniques" },
+        { id: "qtf8DOUq8uk", title: "Lesson 2: Advanced Conversation" },
+        { id: "EBHwZjsR-Fc", title: "Lesson 3: Storytelling" },
+      ],
+    },
   },
 };
 
 const CoursePlayer = () => {
-  const { level } = useParams();
-  const course = courseData[level];
+  const { courseId, level } = useParams();
+  const course = courseData[courseId][level];
 
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [completedLessons, setCompletedLessons] = useState([]);
 
   useEffect(() => {
     const savedProgress = JSON.parse(localStorage.getItem("progress")) || {};
-    setCompletedLessons(savedProgress[level] || []);
-  }, [level]);
+    setCompletedLessons(savedProgress[courseId] || []);
+  }, [courseId]);
 
   const handleVideoEnd = () => {
     if (!completedLessons.includes(currentLessonIndex)) {
       const updatedCompleted = [...completedLessons, currentLessonIndex];
       setCompletedLessons(updatedCompleted);
-      localStorage.setItem("progress", JSON.stringify({ ...completedLessons, [level]: updatedCompleted }));
+      localStorage.setItem("progress", JSON.stringify({ ...completedLessons, [courseId]: updatedCompleted }));
     }
   };
 
@@ -60,28 +114,26 @@ const CoursePlayer = () => {
     }
   };
 
+  const videoCompletionPercentage = ((currentLessonIndex + 1) / course.lessons.length) * 100;
+
   return (
     <div className="course-container">
-      {/* Sidebar with Lessons */}
       <aside className="course-sidebar">
-        <h2 className="course-title">{course.title}</h2>
-        <p className="course-description">{course.description}</p>
+        <h2>{course.title}</h2>
         <ul className="lesson-list">
           {course.lessons.map((lesson, index) => (
             <li
               key={index}
-              className={`lesson-item ${currentLessonIndex === index ? "active" : ""} ${completedLessons.includes(index) ? "completed" : ""}`}
-              onClick={() => setCurrentLessonIndex(index)}
+              className={`lesson-item ${currentLessonIndex === index ? "active" : ""}`}
             >
-              {completedLessons.includes(index) ? "✅ " : "📌 "} {lesson.title}
+              {lesson.title}
             </li>
           ))}
         </ul>
       </aside>
 
-      {/* Video Player Section */}
       <div className="video-container">
-        <h2 className="video-title">{course.lessons[currentLessonIndex].title}</h2>
+        <h3>{course.lessons[currentLessonIndex].title}</h3>
         <iframe
           src={`https://www.youtube.com/embed/${course.lessons[currentLessonIndex].id}`}
           title="Course Video"
@@ -89,145 +141,137 @@ const CoursePlayer = () => {
           allowFullScreen
           onEnded={handleVideoEnd}
         ></iframe>
-
-        {/* Navigation Buttons */}
+        <div className="progress-container">
+          <div className="progress-bar" style={{ width: `${videoCompletionPercentage}%` }}></div>
+        </div>
+        <p className="progress-text">{Math.round(videoCompletionPercentage)}% Completed</p>
         <div className="nav-buttons">
-          <button onClick={handlePrevLesson} disabled={currentLessonIndex === 0}>⬅ Previous</button>
-          <button onClick={handleNextLesson} disabled={currentLessonIndex === course.lessons.length - 1}>Next ➡</button>
+          <button onClick={handlePrevLesson} disabled={currentLessonIndex === 0}>
+            ⬅ Previous
+          </button>
+          <button onClick={handleNextLesson} disabled={currentLessonIndex === course.lessons.length - 1}>
+            Next ➡
+          </button>
         </div>
-
-        {/* Progress Bar */}
-        <div className="progress-bar-container">
-          <div
-            className="progress-bar"
-            style={{ width: `${(completedLessons.length / course.lessons.length) * 100}%` }}
-          ></div>
-        </div>
-        <p className="progress-text">
-          {completedLessons.length} / {course.lessons.length} Lessons Completed
-        </p>
       </div>
 
-      {/* Embedded CSS */}
+      {/* Styling */}
       <style>{`
         .course-container {
           display: flex;
           min-height: 100vh;
+          padding: 20px;
+          background: #f5f5f5;
         }
 
         .course-sidebar {
           width: 25%;
-          background: #f4f4f4;
+          background: #fff;
           padding: 20px;
-          border-right: 2px solid #ddd;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
         }
 
         .course-title {
-          font-size: 1.5rem;
+          font-size: 1.8rem;
           font-weight: bold;
-        }
-
-        .course-description {
-          font-size: 1rem;
-          margin-bottom: 20px;
+          color: #2a9d8f;
         }
 
         .lesson-list {
           list-style: none;
           padding: 0;
+          margin-top: 20px;
         }
 
         .lesson-item {
           padding: 10px;
-          margin: 5px 0;
           background: #fff;
-          border: 1px solid #ddd;
+          margin: 5px 0;
           cursor: pointer;
-          transition: 0.3s;
+          border-radius: 5px;
+          transition: background 0.3s ease;
         }
 
         .lesson-item:hover {
-          background: #ddd;
+          background: #e0e0e0;
         }
 
         .lesson-item.active {
-          background: #ffa726;
-          color: white;
-          font-weight: bold;
-        }
-
-        .lesson-item.completed {
-          text-decoration: line-through;
+          background: #2a9d8f;
+          color: #fff;
         }
 
         .video-container {
           width: 75%;
           padding: 20px;
-        }
-
-        .video-title {
-          font-size: 1.4rem;
-          margin-bottom: 10px;
+          background: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
         }
 
         .video-player {
           width: 100%;
-          height: 450px;
+          height: 400px;
           border-radius: 10px;
         }
 
-        .nav-buttons {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 10px;
-        }
-
-        .nav-buttons button {
-          padding: 10px;
-          font-size: 1rem;
-          background: #2A9D8F;
-          color: white;
-          border: none;
-          cursor: pointer;
-          transition: 0.3s;
-        }
-
-        .nav-buttons button:hover {
-          background: #21867a;
-        }
-
-        .progress-bar-container {
+        .progress-container {
           width: 100%;
           height: 8px;
           background: #ddd;
           border-radius: 5px;
-          margin-top: 15px;
+          margin-top: 20px;
         }
 
         .progress-bar {
           height: 8px;
-          background: #2A9D8F;
-          transition: width 0.3s;
+          background: #2a9d8f;
+          border-radius: 5px;
         }
 
         .progress-text {
           text-align: center;
           font-size: 1rem;
           margin-top: 5px;
+          font-weight: bold;
+        }
+
+        .nav-buttons {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 20px;
+        }
+
+        .nav-buttons button {
+          padding: 10px;
+          background: #2a9d8f;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: background 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+          background: #21867a;
         }
 
         @media (max-width: 768px) {
           .course-container {
             flex-direction: column;
           }
+
           .course-sidebar {
             width: 100%;
-            border-right: none;
-            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
           }
+
           .video-container {
             width: 100%;
           }
+
           .video-player {
             height: 250px;
           }
