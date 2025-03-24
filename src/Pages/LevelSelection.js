@@ -1,36 +1,66 @@
 import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useParams, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const levelData = {
-  Beginner: {
-    description: "Learn the basics of ASL, including the alphabet, common words, and simple phrases.",
-    videoId: "fnFWAzd3Kfw",
-    thumbnail: "https://img.youtube.com/vi/fnFWAzd3Kfw/hqdefault.jpg",
+// Course data for all three courses
+const courseData = {
+  isl: {
+    Beginner: {
+      description: "Learn the basics of ISL, including the alphabet, common words, and simple phrases.",
+      videoId: "Vj_13bdU4dU",
+    },
+    Intermediate: {
+      description: "Enhance your ISL skills with more complex sentences and grammar structures.",
+      videoId: "VtbYvVDItvg",
+    },
+    Advanced: {
+      description: "Master ISL with fluent conversation practice and advanced signing techniques.",
+      videoId: "DOFPRw6Epl0",
+    },
   },
-  Intermediate: {
-    description: "Enhance your ASL skills with more complex sentences and grammar structures.",
-    videoId: "WP1blVh1ZQM",
-    thumbnail: "https://img.youtube.com/vi/WP1blVh1ZQM/hqdefault.jpg",
+  asl: {
+    Beginner: {
+      description: "Learn the basics of ASL, including the alphabet, common signs, and basic conversation.",
+      videoId: "DBQINq0SsAw",
+    },
+    Intermediate: {
+      description: "Improve your ASL skills with more complex conversation and sentence structures.",
+      videoId: "U9KnRdcWL7Y",
+    },
+    Advanced: {
+      description: "Master ASL with fluent conversation and advanced signing techniques.",
+      videoId: "VOnHnaNiVSM",
+    },
   },
-  Advanced: {
-    description: "Master ASL with fluent conversation practice and advanced signing techniques.",
-    playlistId: "PLC26PqZoC0AkS5f-GnxIzYs1yiBK7c4wW",
-    thumbnail: "https://img.youtube.com/vi/fnFWAzd3Kfw/hqdefault.jpg", // Placeholder thumbnail
+  autistic: {
+    Beginner: {
+      description: "Learn basic communication methods for autism support.",
+      videoId: "8xpjvvS4048",
+    },
+    Intermediate: {
+      description: "Enhance your autism communication support skills.",
+      videoId: "Dl79ZADT0Zg",
+    },
+    Advanced: {
+      description: "Master advanced autism communication strategies.",
+      videoId: "qtf8DOUq8uk",
+    },
   },
 };
 
 const LevelSelection = () => {
-  const { courseId } = useParams();
+  const { courseId } = useParams(); // Get the course ID from URL parameters
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = `Explore ${courseId.toUpperCase()} Course`;
   }, [courseId]);
 
+  const levels = Object.keys(courseData[courseId] || {});
+
   return (
     <div
-      className="container-fluid d-flex flex-column align-items-center justify-content-center"
+      className="container-fluid d-flex flex-column align-items-center justify-content-center vh-100"
       style={{
         background: "linear-gradient(135deg, #264653, #2A9D8F)",
         minHeight: "100vh",
@@ -49,50 +79,51 @@ const LevelSelection = () => {
       </h2>
 
       <div className="row w-75 mt-4">
-        {Object.entries(levelData).map(([level, { description, videoId, playlistId, thumbnail }], index) => (
-          <div className="col-md-4 mb-4" key={index}>
+        {levels.map((level, index) => (
+          <div key={index} className="col-md-4 mb-4">
             <div
-              className="card shadow-lg text-center"
+              className="card shadow-lg text-center p-4"
               style={{
+                borderRadius: "20px",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
                 backgroundColor: "#ffffff",
-                borderRadius: "15px",
-                boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.3)",
-                overflow: "hidden",
-                animation: "fadeIn 1s ease-in-out",
+                padding: "20px",
               }}
+              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
             >
-              {/* Video Thumbnail */}
-              <img
-                src={thumbnail}
-                alt={`${level} Course`}
-                className="card-img-top"
-                style={{ height: "180px", objectFit: "cover", cursor: "pointer" }}
-                onClick={() => navigate(`/course-player/${courseId}/${level}`)}
-              />
+              {/* Course Image */}
+              <div
+                className="image-frame"
+                style={{
+                  backgroundImage: `url(https://img.youtube.com/vi/${courseData[courseId][level].videoId}/hqdefault.jpg)`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  height: "180px",
+                  borderRadius: "15px",
+                }}
+              ></div>
 
-              {/* Card Body */}
-              <div className="card-body">
-                <h4 className="text-dark" style={{ fontWeight: "bold" }}>{level} Level</h4>
-                <p className="text-secondary" style={{ fontSize: "1rem" }}>{description}</p>
-                <button
-                  className="btn w-100 mt-2"
-                  style={{
-                    fontSize: "1.2rem",
-                    padding: "12px",
-                    backgroundColor: "#F4A261",
-                    border: "none",
-                    borderRadius: "8px",
-                    color: "#fff",
-                    transition: "all 0.3s ease",
-                    fontWeight: "bold",
-                  }}
-                  onClick={() => navigate(`/course-player/${courseId}/${level}`)}
-                  onMouseOver={(e) => (e.target.style.backgroundColor = "#2A9D8F")}
-                  onMouseOut={(e) => (e.target.style.backgroundColor = "#F4A261")}
-                >
-                  Start {level} Course
-                </button>
-              </div>
+              <h5 className="text-dark mt-3" style={{ fontWeight: "bold" }}>
+                {level} Level
+              </h5>
+              <p className="text-secondary">{courseData[courseId][level].description}</p>
+
+              <button
+                className="btn btn-primary w-100 mt-3"
+                style={{
+                  borderRadius: "10px",
+                  padding: "12px",
+                  fontWeight: "bold",
+                  transition: "background-color 0.3s ease",
+                }}
+                onClick={() => navigate(`/course-player/${courseId}/${level}`)}
+                onMouseOver={(e) => (e.target.style.backgroundColor = "#2A9D8F")}
+                onMouseOut={(e) => (e.target.style.backgroundColor = "#1F7A67")}
+              >
+                Start {level} Course
+              </button>
             </div>
           </div>
         ))}
