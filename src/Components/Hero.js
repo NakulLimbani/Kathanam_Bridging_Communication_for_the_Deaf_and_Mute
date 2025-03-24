@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";  // Importing framer-motion for animations
 
 const Hero = () => {
+  // Simulating user login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    // Check if the user is logged in
+    // This should be replaced with actual logic (e.g., checking token, user data)
+    const user = localStorage.getItem("user");
+    if (user) {
+      setIsLoggedIn(true);
+      setUserName(user);
+    }
+  }, []);
+
   return (
     <section className="hero-section">
       <div className="container">
@@ -11,12 +27,24 @@ const Hero = () => {
               <span className="text-green">Studying</span> Online is now <br />
               much easier
             </h1>
-            <p className="lead">Welcome Back! <br /> Glad to see you, Again!</p>
+            <p className="lead">
+              Welcome Back! <br />
+              {isLoggedIn ? `Glad to see you, ${userName}!` : "Glad to see you, Again!"}
+            </p>
 
             {/* CTA Buttons */}
             <div className="d-flex align-items-center gap-3 mt-3">
-              <a href="#" className="btn join-btn">Join for free</a>
-              <a href="#" className="watch-link">
+              {!isLoggedIn ? (
+                <Link to="/login" className="btn join-btn">Join for free</Link>
+              ) : (
+                <button className="btn join-btn" onClick={() => setIsLoggedIn(false)}>Logout</button>
+              )}
+              <a
+                href="https://youtu.be/NaV3U9siRWw?si=3T17bcFe67rV5X_K"
+                className="watch-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <span className="play-icon">▶</span> Watch how it works
               </a>
             </div>
@@ -24,24 +52,38 @@ const Hero = () => {
 
           {/* Right Side - Logo & Floating Cards */}
           <div className="col-lg-6 col-md-12 position-relative text-center">
-            {/* Your Logo (Replaces Placeholder) */}
+            {/* Your Logo */}
             <img src="/logo-Photoroom.png" alt="Kathanam Logo" className="hero-logo" />
 
-            {/* Floating Cards */}
-            <div className="floating-card card-1">
-              <span className="icon">📊</span>
-              <p><strong>250k</strong> Assisted Students</p>
-            </div>
+            {/* Floating Cards with motion animation */}
+            <div className="d-flex justify-content-around mt-4">
+              <motion.div
+                className="floating-card card-1"
+                animate={{ x: [0, 10, 0], y: [0, -10, 0] }} // Move the card in a small bouncing animation
+                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+              >
+                <span className="icon">📊</span>
+                <p><strong>250k</strong> Assisted Students</p>
+              </motion.div>
 
-            <div className="floating-card card-2">
-              <span className="icon">🎉</span>
-              <p><strong>Congratulations</strong> <br /> Your Registration Completed</p>
-            </div>
+              <motion.div
+                className="floating-card card-2"
+                animate={{ x: [0, -10, 0], y: [0, 10, 0] }} // Another card with different motion
+                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+              >
+                <span className="icon">🎉</span>
+                <p><strong>Congratulations</strong> <br /> Your Registration Completed</p>
+              </motion.div>
 
-            <div className="floating-card card-3">
-              <img src="https://via.placeholder.com/40" alt="User" className="user-avatar" />
-              <p><strong>User Experience Videos</strong> <br /> Today at 12:00 PM</p>
-              <a href="#" className="btn join-now-btn">Join Now</a>
+              <motion.div
+                className="floating-card card-3"
+                animate={{ x: [0, 10, 0], y: [0, 5, 0] }} // Similar bouncing effect for the 3rd card
+                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+              >
+                <span className="icon">🎥</span>
+                <p><strong>User Experience Videos</strong> <br /> Today at 12:00 PM</p>
+                <Link to="/experience-videos" className="btn join-now-btn">Join Now</Link>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -54,7 +96,8 @@ const Hero = () => {
       <style>{`
         /* Hero Section */
         .hero-section {
-          background: linear-gradient(to right, #e6761b, #db6d17);
+          background: linear-gradient(to right, rgba(204, 99, 25, 0.9), rgba(219, 109, 23, 0.9)), url('/path-to-your-image.jpg') no-repeat center center;
+          background-size: cover;
           padding: 100px 0 50px;
           color: white;
           position: relative;
@@ -118,13 +161,12 @@ const Hero = () => {
 
         /* Floating Cards */
         .floating-card {
-          position: absolute;
-          background: rgba(255, 255, 255, 1); /* Fully opaque white */
-          color: #333; /* Dark text for visibility */
-          font-weight: bold; /* Ensure text is readable */
+          background: rgba(255, 255, 255, 0.9); /* Slight opacity for better clarity */
+          color: #333;
+          font-weight: bold;
           padding: 15px;
           border-radius: 10px;
-          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
           text-align: center;
           font-size: 1rem;
           min-width: 200px;
@@ -133,41 +175,27 @@ const Hero = () => {
         .floating-card p {
           margin: 0;
           font-size: 1rem;
-          color: #333; /* Ensure contrast */
+          color: #333;
         }
 
         .floating-card strong {
-          color: #000; /* Make numbers and headings bolder */
+          color: #000;
         }
 
-        /* Adjust Floating Card Positions */
-        .card-1 {
-          top: 15%;
-          left: 10%;
-        }
-
-        .card-2 {
-          top: 40%;
-          right: 10%;
-        }
-
-        .card-3 {
-          bottom: 10%;
-          left: 15%;
+        /* Card Layout for User Experience Video */
+        .card-1, .card-2, .card-3 {
           display: flex;
+          justify-content: center;
           align-items: center;
-          gap: 10px;
-          padding: 10px;
+          flex-direction: column;
+          padding: 20px;
         }
 
-        /* Floating Card Avatar */
-        .user-avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
+        .icon {
+          font-size: 2rem;
+          margin-bottom: 10px;
         }
 
-        /* Fix Join Now Button */
         .join-now-btn {
           background-color: #d63384;
           color: white;
