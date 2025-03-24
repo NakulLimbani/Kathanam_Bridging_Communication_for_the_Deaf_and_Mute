@@ -77,12 +77,9 @@ const CustomNavbar = () => {
               Autism
             </Nav.Link>
 
-            {/* ✅ Added Speech-to-Text and Translate */}
-            <Nav.Link as={Link} to="/speech-to-text" className="nav-item">
-              🎤 Speech to Text
-            </Nav.Link>
+
             <Nav.Link as={Link} to="/translate" className="nav-item">
-              🌍 Translate
+               Translate
             </Nav.Link>
           </Nav>
 
@@ -187,3 +184,4 @@ const CustomNavbar = () => {
 };
 
 export default CustomNavbar;
+
