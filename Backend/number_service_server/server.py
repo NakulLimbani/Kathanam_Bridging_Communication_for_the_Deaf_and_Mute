@@ -12,12 +12,9 @@ app = Flask(__name__)
 CORS(app, origins=["https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"])  # Replace with your actual frontend URL
 
 # Load the trained model (.h5)
-MODEL_PATH = r"numbers_sign_language_model_mobilenetv2.h5"  # Ensure the model file is in the correct folder
-try:
-    model = tf.keras.models.load_model(MODEL_PATH)
-except Exception as e:
-    return jsonify({"error": f"Model loading failed: {str(e)}"}), 500
-    
+MODEL_PATH = r"numbers_sign_language_model_mobilenetv2.h5" 
+model = tf.keras.models.load_model(MODEL_PATH) # Ensure the model file is in the correct folder
+
 # Define class labels (adjust based on your dataset)
 CLASS_LABELS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
