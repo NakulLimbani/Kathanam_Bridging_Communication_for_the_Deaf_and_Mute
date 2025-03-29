@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin for React frontend
 
 # Load the trained model (.h5)
-MODEL_PATH = r"/number_service_server/numbers_sign_language_model_mobilenetv2.h5"  # Ensure this path is correct
+MODEL_PATH = r"numbers_sign_language_model_mobilenetv2.h5"  # Ensure this path is correct
 model = tf.keras.models.load_model(MODEL_PATH)
 
 # Define class labels (adjust based on your dataset)
