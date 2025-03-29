@@ -8,8 +8,14 @@ import io
 
 app = Flask(__name__)
 
+# Enable CORS for all domains
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+# Or, if you want to allow only your specific frontend, use this:
+# CORS(app, resources={r"/*": {"origins": "https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"}})
+
 # Allow requests only from your frontend domain in production
-CORS(app, origins=["https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"])  # Replace with your actual frontend URL
+#CORS(app, origins=["https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"])  # Replace with your actual frontend URL
 
 # Load the trained model (.h5)
 MODEL_PATH = r"numbers_sign_language_model_mobilenetv2.h5" 
