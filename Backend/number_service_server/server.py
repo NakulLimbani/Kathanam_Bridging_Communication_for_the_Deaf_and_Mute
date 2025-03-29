@@ -8,11 +8,8 @@ import io
 
 app = Flask(__name__)
 
-# Enable CORS for all domains
-CORS(app, resources={r"/*": {"origins": "*"}})
-
-# Or, if you want to allow only your specific frontend, use this:
-# CORS(app, resources={r"/*": {"origins": "https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"}})
+# Enable CORS for your specific frontend URL
+CORS(app, resources={r"/*": {"origins": "https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"}})
 
 # Allow requests only from your frontend domain in production
 #CORS(app, origins=["https://kathanam-bridging-communication-for-the-deaf-and-mute.vercel.app"])  # Replace with your actual frontend URL
@@ -48,4 +45,4 @@ def predict():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Render gives PORT dynamically
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=True)
