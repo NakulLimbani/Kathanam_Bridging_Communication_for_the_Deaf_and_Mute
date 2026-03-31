@@ -1,6 +1,6 @@
 # Kathanam - Sign Language Learning & Communication App
 
-Kathanam is an interactive and inclusive platform designed to help individuals who are deaf, mute, or neurodiverse learn and communicate through sign language. The app features real-time translation, engaging learning tools, and personalized experiences, providing users with the opportunity to learn sign language in a fun and accessible way.
+Kathanam is an interactive and inclusive platform designed to help individuals who are deaf, mute, or neurodiverse learn and communicate through sign language. The app features real-time translation, engaging learning tools, and personalized experiences, providing users with the opportunity to learn sign language in a fun and accessible way
 
 ![image](https://github.com/user-attachments/assets/0b46e55c-f2e6-4e99-b8c2-beedb9ec8412)
 ![image](https://github.com/user-attachments/assets/bbda2341-7f29-4118-9fbf-19de7ab75a68)
@@ -9,7 +9,7 @@ Kathanam is an interactive and inclusive platform designed to help individuals w
 
 ***Introduction***
 
-Kathanam provides an intuitive learning platform for those wanting to master sign language. Through interactive courses, real-time translation tools, and engaging features, users can learn at their own pace and customize their learning journey. Whether you're a beginner or looking to enhance your skills, Kathanam has the right tools for you.
+Kathanam provides an intuitive learning platform for those wanting to master sign language. Through interactive courses, real-time translation tools, and engaging features, users can learn at their own pace and customize their learning journey. Whether you're a beginner or looking to enhance your skills, Kathanam has the right tools for you
 
 ***Features***
 
@@ -20,9 +20,9 @@ The Home Screen is designed to give users quick access to available courses and 
 
 
 
-Indian Sign Language (ISL): Offers a variety of lessons, from beginner to advanced levels.
-American Sign Language (ASL): Courses designed to teach the basics of ASL, including common phrases, signs, and grammar.
-Autism: Tailored courses aimed at making learning accessible for individuals on the autism spectrum, with a focus on visual aids and simplified lessons.
+Indian Sign Language (ISL): Offers a variety of lessons, from beginner to advanced levels
+American Sign Language (ASL): Courses designed to teach the basics of ASL, including common phrases, signs, and grammar
+Autism: Tailored courses aimed at making learning accessible for individuals on the autism spectrum, with a focus on visual aids and simplified lessons
 Learning Features on the Home Screen:
 
 Sign Animation: Courses include animations demonstrating signs for better understanding.
